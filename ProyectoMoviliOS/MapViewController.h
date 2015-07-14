@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 
-@interface MapViewController : UIViewController<CLLocationManagerDelegate>
+@interface MapViewController : UIViewController<CLLocationManagerDelegate,MKAnnotation>
 @property (nonatomic,retain) CLLocationManager *locationManager;
 @property (strong, nonatomic) IBOutlet MKMapView *mapComponent;
 
+- (void) getRestaurantes;
 @end

@@ -24,6 +24,8 @@
     [_locationManager startUpdatingLocation];
     self.mapComponent.mapType = MKMapTypeHybrid;
     _mapComponent.showsUserLocation=YES;
+    self.getRestaurantes;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,6 +36,40 @@
     CLLocation *loc= [locations lastObject];
     NSLog(@"Latitud: %f y longitud: %f",(double)loc.coordinate.latitude,(double)loc.coordinate.longitude);
     
+}
+
+- (void) getRestaurantes{
+    NSMutableString *urlString=[[NSMutableString alloc]initWithString:@"http://localhost:8888/Trabajo-fin-master-us/api/restaurantes"];
+    NSURL *url= [NSURL URLWithString:urlString];
+    NSURLRequest *req=[NSURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:req queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        //Esto se ejecuta cuando termina la llamada
+        if(data.length>0 && connectionError== nil){
+            NSArray *restaurantesInfo= [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
+            int tam=[restaurantesInfo count];
+            for (int i=0; tam>i; i++) {
+                
+                NSString *latitud=[NSString stringWithFormat:@"%@",[restaurantesInfo[i] valueForKey:@"latitud"]];
+                NSString *longitud=[NSString stringWithFormat:@"%@",[restaurantesInfo[i] valueForKey:@"longitud"]];
+                
+                CLLocationCoordinate2D coord;
+                
+                coord.latitude = latitud.doubleValue;
+                
+                coord.longitude = longitud.doubleValue;
+                MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+                point.coordinate = coord;
+                point.title = @"Where am I?";
+                point.subtitle = @"I'm here!!!";
+                
+                [self.mapComponent addAnnotation:point];
+
+            }
+
+           
+          
+        }
+    }];
 }
 /*
 #pragma mark - Navigation
