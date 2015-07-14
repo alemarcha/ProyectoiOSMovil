@@ -17,21 +17,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.mapComponent.mapType = MKMapTypeStandard;
-    
-    
 
-    
+    self.locationManager=[[CLLocationManager alloc]init];
+    self.locationManager.delegate=self;
+    [self.locationManager requestWhenInUseAuthorization];
+    [_locationManager startUpdatingLocation];
+    self.mapComponent.mapType = MKMapTypeHybrid;
+    _mapComponent.showsUserLocation=YES;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
-
-
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
     CLLocation *loc= [locations lastObject];
     NSLog(@"Latitud: %f y longitud: %f",(double)loc.coordinate.latitude,(double)loc.coordinate.longitude);
