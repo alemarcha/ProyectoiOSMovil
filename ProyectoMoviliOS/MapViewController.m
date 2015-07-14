@@ -17,6 +17,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.mapComponent.mapType = MKMapTypeStandard;
+    
+    
+
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,6 +29,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
+    CLLocation *loc= [locations lastObject];
+    NSLog(@"Latitud: %f y longitud: %f",(double)loc.coordinate.latitude,(double)loc.coordinate.longitude);
+    
+}
 /*
 #pragma mark - Navigation
 

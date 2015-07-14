@@ -16,6 +16,7 @@
 		02BDE2141B54343F00BA3A97 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02BDE2131B54343F00BA3A97 /* Images.xcassets */; };
 		02BDE2171B54343F00BA3A97 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02BDE2151B54343F00BA3A97 /* LaunchScreen.xib */; };
 		02BDE2231B54343F00BA3A97 /* ProyectoMoviliOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 02BDE2221B54343F00BA3A97 /* ProyectoMoviliOSTests.m */; };
+		02D9C16D1B55843B00FC6E03 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D9C16C1B55843B00FC6E03 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		02BDE21C1B54343F00BA3A97 /* ProyectoMoviliOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProyectoMoviliOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		02BDE2211B54343F00BA3A97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		02BDE2221B54343F00BA3A97 /* ProyectoMoviliOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProyectoMoviliOSTests.m; sourceTree = "<group>"; };
+		02D9C16C1B55843B00FC6E03 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02D9C16D1B55843B00FC6E03 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,6 +72,7 @@
 		02BDE1FA1B54343F00BA3A97 = {
 			isa = PBXGroup;
 			children = (
+				02D9C16C1B55843B00FC6E03 /* MapKit.framework */,
 				02BDE2051B54343F00BA3A97 /* ProyectoMoviliOS */,
 				02BDE21F1B54343F00BA3A97 /* ProyectoMoviliOSTests */,
 				02BDE2041B54343F00BA3A97 /* Products */,
@@ -179,6 +183,11 @@
 					02BDE2021B54343F00BA3A97 = {
 						CreatedOnToolsVersion = 6.3.2;
 						DevelopmentTeam = DWZ77GEEBY;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					02BDE21B1B54343F00BA3A97 = {
 						CreatedOnToolsVersion = 6.3.2;
