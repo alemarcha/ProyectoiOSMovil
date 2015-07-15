@@ -13,5 +13,5 @@
 @property (nonatomic,retain) CLLocationManager *locationManager;
 @property (strong, nonatomic) IBOutlet MKMapView *mapComponent;
 
-- (void) getRestaurantes;
+- (void) getRestaurantes:(CLLocationDegrees) latitud longitud:(CLLocationDegrees) longitud;
 @end

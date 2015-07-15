@@ -24,7 +24,7 @@
     [_locationManager startUpdatingLocation];
     self.mapComponent.mapType = MKMapTypeHybrid;
     _mapComponent.showsUserLocation=YES;
-    self.getRestaurantes;
+
     
 }
 
@@ -35,11 +35,24 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
     CLLocation *loc= [locations lastObject];
     NSLog(@"Latitud: %f y longitud: %f",(double)loc.coordinate.latitude,(double)loc.coordinate.longitude);
-    
+
+    [self getRestaurantes:loc.coordinate.latitude longitud:loc.coordinate.longitude];
+    [self.locationManager stopUpdatingLocation];
+    [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(_turnOnLocationManager)  userInfo:nil repeats:NO];
+
 }
 
-- (void) getRestaurantes{
-    NSMutableString *urlString=[[NSMutableString alloc]initWithString:@"http://localhost:8888/Trabajo-fin-master-us/api/restaurantes"];
+- (void)_turnOnLocationManager {
+    [self.locationManager startUpdatingLocation];
+}
+
+
+
+- (void) getRestaurantes:(CLLocationDegrees) latitud longitud:(CLLocationDegrees) longitud{
+    NSString *myStringLatitud = [[NSNumber numberWithDouble:latitud] stringValue];
+        NSString *myStringLongitud= [[NSNumber numberWithDouble:longitud] stringValue];
+    NSString *urlForm= [NSString stringWithFormat:@"%@%@/%@/1000", @"http://localhost:8888/Trabajo-fin-master-us/api/restaurantesPorCercaniaLatLong/", myStringLatitud,myStringLongitud];
+    NSMutableString *urlString=[[NSMutableString alloc]initWithString:urlForm];
     NSURL *url= [NSURL URLWithString:urlString];
     NSURLRequest *req=[NSURLRequest requestWithURL:url];
     [NSURLConnection sendAsynchronousRequest:req queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
@@ -51,6 +64,10 @@
                 
                 NSString *latitud=[NSString stringWithFormat:@"%@",[restaurantesInfo[i] valueForKey:@"latitud"]];
                 NSString *longitud=[NSString stringWithFormat:@"%@",[restaurantesInfo[i] valueForKey:@"longitud"]];
+                                NSString *name=[NSString stringWithFormat:@"%@",[restaurantesInfo[i] valueForKey:@"name"]];
+                                NSString *description=[NSString stringWithFormat:@"%@",[restaurantesInfo[i] valueForKey:@"description"]];
+                NSString *phone=[NSString stringWithFormat:@"%@",[restaurantesInfo[i] valueForKey:@"phone"]];
+                NSString *speciality=[NSString stringWithFormat:@"%@",[restaurantesInfo[i] valueForKey:@"speciality"]];
                 
                 CLLocationCoordinate2D coord;
                 
@@ -59,15 +76,23 @@
                 coord.longitude = longitud.doubleValue;
                 MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
                 point.coordinate = coord;
-                point.title = @"Where am I?";
-                point.subtitle = @"I'm here!!!";
+                point.title = name;
+                point.subtitle = speciality;
+                
                 
                 [self.mapComponent addAnnotation:point];
 
             }
 
-           
-          
+            CLLocationCoordinate2D coord;
+            
+            coord.latitude = latitud;
+            
+            coord.longitude = longitud;
+            MKCoordinateRegion rec=MKCoordinateRegionMakeWithDistance(coord, 2000, 20000);
+            _mapComponent.mapType=MKMapTypeHybrid;
+
+            [_mapComponent setRegion:rec];
         }
     }];
 }
