@@ -79,7 +79,7 @@
 
 - (void) getRestaurantes:(CLLocationDegrees) latitud longitud:(CLLocationDegrees) longitud{
     
-
+    
     NSString *myStringLatitud = [[NSNumber numberWithDouble:latitud] stringValue];
     NSString *myStringLongitud= [[NSNumber numberWithDouble:longitud] stringValue];
     NSString *urlForm= [NSString stringWithFormat:@"%@%@/%@/2000", @"http://localhost:8888/Trabajo-fin-master-us/api/restaurantesPorCercaniaLatLong/", myStringLatitud,myStringLongitud];
@@ -107,7 +107,7 @@
                 coord.latitude = latitud.doubleValue;
                 
                 coord.longitude = longitud.doubleValue;
-
+                
                 MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
                 point.coordinate = coord;
                 
@@ -136,11 +136,26 @@
     if ([[annotation title] isEqualToString:@"Current Location"]) {
         return nil;
     }
-        static NSString *annotationIdentifier = @"annotationIdentifier";
-    MKPinAnnotationView *pinView = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:annotationIdentifier];
-    pinView.pinColor = MKPinAnnotationColorPurple;
-    pinView.canShowCallout = YES;
-    return pinView;}
+    static NSString *annotationIdentifier = @"annotationIdentifier";
+//    MKPinAnnotationView *pinView = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:annotationIdentifier;
+//    pinView.pinColor = MKPinAnnotationColorPurple;
+//    pinView.canShowCallout = YES;
+    MKAnnotationView *pinView = (MKAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"CustomPinAnnotationView"];
+    if (!pinView)
+    {
+        // If an existing pin view was not available, create one.
+        pinView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"CustomPinAnnotationView"];
+
+        pinView.canShowCallout = YES;
+        pinView.image=[UIImage imageNamed:@"Image_blue"];
+        pinView.calloutOffset = CGPointMake(0, 32);
+    } else {
+        pinView.annotation = annotation;
+    }
+    
+    
+    return pinView;
+}
 /*
  #pragma mark - Navigation
  
