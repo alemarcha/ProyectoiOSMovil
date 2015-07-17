@@ -8,13 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface MapViewController : UIViewController<CLLocationManagerDelegate,MKAnnotation>
+@interface MapViewController : UIViewController<CLLocationManagerDelegate,MKMapViewDelegate>
 @property (nonatomic,retain) CLLocationManager *locationManager;
 @property (strong, nonatomic) IBOutlet MKMapView *mapComponent;
 @property bool *primeraUbicacion;
 @property NSNumber *ultimaLatitudPeticion;
 @property NSNumber *ultimaLongitudPeticion;
+
 
 - (void) getRestaurantes:(CLLocationDegrees) latitud longitud:(CLLocationDegrees) longitud;
 @end
