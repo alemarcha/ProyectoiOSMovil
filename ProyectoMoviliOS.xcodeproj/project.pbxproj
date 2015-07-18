@@ -17,6 +17,7 @@
 		02BDE2171B54343F00BA3A97 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02BDE2151B54343F00BA3A97 /* LaunchScreen.xib */; };
 		02BDE2231B54343F00BA3A97 /* ProyectoMoviliOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 02BDE2221B54343F00BA3A97 /* ProyectoMoviliOSTests.m */; };
 		02D9C16D1B55843B00FC6E03 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D9C16C1B55843B00FC6E03 /* MapKit.framework */; };
+		02FE10021B5A87C000948211 /* CustomMKPointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FE10011B5A87C000948211 /* CustomMKPointAnnotation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,8 @@
 		02BDE2211B54343F00BA3A97 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		02BDE2221B54343F00BA3A97 /* ProyectoMoviliOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProyectoMoviliOSTests.m; sourceTree = "<group>"; };
 		02D9C16C1B55843B00FC6E03 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		02FE10001B5A87C000948211 /* CustomMKPointAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomMKPointAnnotation.h; sourceTree = "<group>"; };
+		02FE10011B5A87C000948211 /* CustomMKPointAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomMKPointAnnotation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +106,8 @@
 				02B4D21E1B55420200E845AF /* LoginViewController.m */,
 				02B4D2201B55421100E845AF /* MapViewController.h */,
 				02B4D2211B55421100E845AF /* MapViewController.m */,
+				02FE10001B5A87C000948211 /* CustomMKPointAnnotation.h */,
+				02FE10011B5A87C000948211 /* CustomMKPointAnnotation.m */,
 			);
 			path = ProyectoMoviliOS;
 			sourceTree = "<group>";
@@ -243,6 +248,7 @@
 				02BDE20F1B54343F00BA3A97 /* ViewController.m in Sources */,
 				02B4D2221B55421100E845AF /* MapViewController.m in Sources */,
 				02BDE20C1B54343F00BA3A97 /* AppDelegate.m in Sources */,
+				02FE10021B5A87C000948211 /* CustomMKPointAnnotation.m in Sources */,
 				02BDE2091B54343F00BA3A97 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

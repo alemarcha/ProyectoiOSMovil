@@ -8,6 +8,7 @@
 
 #import "MapViewController.h"
 #import "math.h"
+#import "CustomMKPointAnnotation.h"
 
 @interface MapViewController ()
 
@@ -82,7 +83,7 @@
     
     NSString *myStringLatitud = [[NSNumber numberWithDouble:latitud] stringValue];
     NSString *myStringLongitud= [[NSNumber numberWithDouble:longitud] stringValue];
-    NSString *urlForm= [NSString stringWithFormat:@"%@%@/%@/2000", @"http://localhost:8888/Trabajo-fin-master-us/api/restaurantesPorCercaniaLatLong/", myStringLatitud,myStringLongitud];
+    NSString *urlForm= [NSString stringWithFormat:@"%@%@/%@/1000", @"http://localhost:8888/Trabajo-fin-master-us/api/restaurantesPorCercaniaLatLong/", myStringLatitud,myStringLongitud];
     NSMutableString *urlString=[[NSMutableString alloc]initWithString:urlForm];
     NSURL *url= [NSURL URLWithString:urlString];
     NSURLRequest *req=[NSURLRequest requestWithURL:url];
@@ -95,12 +96,21 @@
         if(data.length>0 && connectionError== nil){
             NSArray *restaurantesInfo= [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
             int tam=[restaurantesInfo count];
+            self.dict =[[NSMutableDictionary alloc] init];
             for (int i=0; tam>i; i++) {
                 
                 NSString *latitud=[NSString stringWithFormat:@"%@",[restaurantesInfo[i] valueForKey:@"latitud"]];
+                                NSString *id=[NSString stringWithFormat:@"%@",[restaurantesInfo[i] valueForKey:@"id"]];
                 NSString *longitud=[NSString stringWithFormat:@"%@",[restaurantesInfo[i] valueForKey:@"longitud"]];
                 NSString *name=[NSString stringWithFormat:@"%@",[restaurantesInfo[i] valueForKey:@"name"]];
                 NSString *speciality=[NSString stringWithFormat:@"%@",[restaurantesInfo[i] valueForKey:@"speciality"]];
+                NSString *avgRateString=[NSString stringWithFormat:@"%@",[restaurantesInfo[i] valueForKey:@"avgRate"]];
+
+                CustomMKPointAnnotation *point=[[CustomMKPointAnnotation alloc] initWithLocation:id avRage:avgRateString];
+                
+
+               
+               
                 
                 CLLocationCoordinate2D coord;
                 
@@ -108,12 +118,10 @@
                 
                 coord.longitude = longitud.doubleValue;
                 
-                MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+                //MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
                 point.coordinate = coord;
-                
-                point.title = name;
+                point.title=name;
                 point.subtitle = speciality;
-                
                 [self.mapComponent addAnnotation:point];
                 
             }
@@ -123,7 +131,7 @@
             coord.latitude = latitud;
             
             coord.longitude = longitud;
-            MKCoordinateRegion rec=MKCoordinateRegionMakeWithDistance(coord, 4000, 4000);
+            MKCoordinateRegion rec=MKCoordinateRegionMakeWithDistance(coord, 2000, 2000);
             self.mapComponent.mapType=MKMapTypeHybrid;
             
             [self.mapComponent setRegion:rec];
@@ -137,18 +145,37 @@
         return nil;
     }
     static NSString *annotationIdentifier = @"annotationIdentifier";
-//    MKPinAnnotationView *pinView = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:annotationIdentifier;
-//    pinView.pinColor = MKPinAnnotationColorPurple;
-//    pinView.canShowCallout = YES;
+    //    MKPinAnnotationView *pinView = [[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:annotationIdentifier;
+    //    pinView.pinColor = MKPinAnnotationColorPurple;
+    //    pinView.canShowCallout = YES;
     MKAnnotationView *pinView = (MKAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"CustomPinAnnotationView"];
     if (!pinView)
     {
+        MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
         // If an existing pin view was not available, create one.
         pinView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"CustomPinAnnotationView"];
-
+       
         pinView.canShowCallout = YES;
-        pinView.image=[UIImage imageNamed:@"Image_blue"];
+
+        if(((CustomMKPointAnnotation *)annotation).avgRate!=nil && [((CustomMKPointAnnotation *)annotation).avgRate doubleValue] < 5){
+            pinView.image=[UIImage imageNamed:@"Image_black"];
+        
+        }else if(((CustomMKPointAnnotation *)annotation).avgRate!=nil && [((CustomMKPointAnnotation *)annotation).avgRate doubleValue] < 6){
+            pinView.image=[UIImage imageNamed:@"Image_brown"];
+        }else if(((CustomMKPointAnnotation *)annotation).avgRate!=nil && [((CustomMKPointAnnotation *)annotation).avgRate doubleValue]< 7){
+            pinView.image=[UIImage imageNamed:@"Image_blue"];
+        }else if(((CustomMKPointAnnotation *)annotation).avgRate!=nil && [((CustomMKPointAnnotation *)annotation).avgRate doubleValue] < 8){
+            pinView.image=[UIImage imageNamed:@"Image_green"];
+        }else if(((CustomMKPointAnnotation *)annotation).avgRate!=nil && [((CustomMKPointAnnotation *)annotation).avgRate doubleValue] < 10){
+            pinView.image=[UIImage imageNamed:@"Image_pink"];
+            
+        }else{
+            pinView.image=[UIImage imageNamed:@"Image_white"];
+        }
+        
         pinView.calloutOffset = CGPointMake(0, 32);
+
+
     } else {
         pinView.annotation = annotation;
     }

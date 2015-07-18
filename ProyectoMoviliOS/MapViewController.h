@@ -16,7 +16,7 @@
 @property bool *primeraUbicacion;
 @property NSNumber *ultimaLatitudPeticion;
 @property NSNumber *ultimaLongitudPeticion;
-
+@property NSMutableDictionary *dict;
 
 - (void) getRestaurantes:(CLLocationDegrees) latitud longitud:(CLLocationDegrees) longitud;
 @end
