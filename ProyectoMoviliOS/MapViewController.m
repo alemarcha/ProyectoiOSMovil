@@ -1,3 +1,4 @@
+
 //
 //  MapViewController.m
 //  ProyectoMoviliOS
@@ -28,9 +29,11 @@
     self.mapComponent.mapType = MKMapTypeStandard;
     _mapComponent.showsUserLocation=YES;
     self.primeraUbicacion=false;
-    
-    
-    
+    self.latitudDelta=0.2;
+
+self.longDelta=0.2;
+
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,35 +43,36 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
     CLLocation *loc= [locations lastObject];
     NSLog(@"Latitud: %f y longitud: %f",(double)loc.coordinate.latitude,(double)loc.coordinate.longitude);
-    // Earth’s radius, sphere
-    
-    float radioTierra=6378137;
-    
-    // offsets in meters
-    float dn = 1000;
-    float de = 1000;
-    
-    
-    // Coordinate offsets in radians
-    float dLat =  dn / radioTierra;
-    float dLon = de / (radioTierra * cos(M_PI * loc.coordinate.latitude / 180));
-    
-    // OffsetPosition, decimal degrees
-    float mayorLat = loc.coordinate.latitude + dLat * 180 / M_PI;
-    double mayorLongitud = loc.coordinate.longitude + dLon * 180 / M_PI;
-    
-    double menorLat = loc.coordinate.latitude - dLat * 180 / M_PI;
-    double menorLongitud = loc.coordinate.longitude - dLon * 180 / M_PI;
-    
-    
-    
-    if (!self.primeraUbicacion || mayorLat<[_ultimaLatitudPeticion floatValue] || menorLat>[self.ultimaLatitudPeticion floatValue] ||  menorLongitud>[self.ultimaLongitudPeticion floatValue]|| mayorLongitud<[_ultimaLongitudPeticion floatValue ]) {
+//    // Earth’s radius, sphere
+//    
+//    float radioTierra=6378137;
+//    
+//    // offsets in meters
+//    float dn = 1000;
+//    float de = 1000;
+//    
+//    
+//    // Coordinate offsets in radians
+//    float dLat =  dn / radioTierra;
+//    float dLon = de / (radioTierra * cos(M_PI * loc.coordinate.latitude / 180));
+//    
+//    // OffsetPosition, decimal degrees
+//    float mayorLat = loc.coordinate.latitude + dLat * 180 / M_PI;
+//    double mayorLongitud = loc.coordinate.longitude + dLon * 180 / M_PI;
+//    
+//    double menorLat = loc.coordinate.latitude - dLat * 180 / M_PI;
+//    double menorLongitud = loc.coordinate.longitude - dLon * 180 / M_PI;
+//    
+//    
+//    
+//    if (!self.primeraUbicacion || mayorLat<[_ultimaLatitudPeticion floatValue] || menorLat>[self.ultimaLatitudPeticion floatValue] ||  menorLongitud>[self.ultimaLongitudPeticion floatValue]|| mayorLongitud<[_ultimaLongitudPeticion floatValue ]) {
+    if (!self.primeraUbicacion){
         self.primeraUbicacion=true;
         [self getRestaurantes:loc.coordinate.latitude longitud:loc.coordinate.longitude];
     }
-    
-    [self.locationManager stopUpdatingLocation];
-    [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(_turnOnLocationManager)  userInfo:nil repeats:NO];
+//    
+//    [self.locationManager stopUpdatingLocation];
+//    [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(_turnOnLocationManager)  userInfo:nil repeats:NO];
     
 }
 
@@ -107,7 +111,10 @@
                 NSString *avgRateString=[NSString stringWithFormat:@"%@",[restaurantesInfo[i] valueForKey:@"avgRate"]];
 
                 CustomMKPointAnnotation *point=[[CustomMKPointAnnotation alloc] initWithLocation:id avRage:avgRateString];
-                
+                NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+                f.numberStyle = NSNumberFormatterDecimalStyle;
+                NSNumber *myNumber = [f numberFromString:avgRateString];
+                NSString *imprimir=[NSString stringWithFormat:name,@"-",id];
 
                
                
@@ -120,8 +127,9 @@
                 
                 //MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
                 point.coordinate = coord;
-                point.title=name;
-                point.subtitle = speciality;
+                point.title=[NSString stringWithFormat:avgRateString];
+                point.subtitle = imprimir;
+                point.avgRate =myNumber;
                 [self.mapComponent addAnnotation:point];
                 
             }
@@ -131,7 +139,10 @@
             coord.latitude = latitud;
             
             coord.longitude = longitud;
-            MKCoordinateRegion rec=MKCoordinateRegionMakeWithDistance(coord, 2000, 2000);
+           // MKCoordinateRegion rec=MKCoordinateRegionMakeWithDistance(coord, 2000, 2000);
+
+
+           MKCoordinateRegion rec= MKCoordinateRegionMake(coord,MKCoordinateSpanMake(self.latitudDelta, self.longDelta));
             self.mapComponent.mapType=MKMapTypeHybrid;
             
             [self.mapComponent setRegion:rec];
@@ -154,7 +165,8 @@
         MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
         // If an existing pin view was not available, create one.
         pinView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"CustomPinAnnotationView"];
-       
+    }
+    
         pinView.canShowCallout = YES;
 
         if(((CustomMKPointAnnotation *)annotation).avgRate!=nil && [((CustomMKPointAnnotation *)annotation).avgRate doubleValue] < 5){
@@ -176,13 +188,23 @@
         pinView.calloutOffset = CGPointMake(0, 32);
 
 
-    } else {
-        pinView.annotation = annotation;
-    }
+    
     
     
     return pinView;
 }
+-(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
+
+    NSLog(@"holaaa%f %f",mapView.centerCoordinate.latitude,mapView.centerCoordinate.longitude);
+        NSLog(@"delta%f %f",mapView.region.span.latitudeDelta,mapView.region.span.longitudeDelta);
+    if(self.primeraUbicacion){
+        self.latitudDelta=mapView.region.span.latitudeDelta;
+        self.longDelta=mapView.region.span.longitudeDelta;
+    [self getRestaurantes:mapView.centerCoordinate.latitude longitud:mapView.centerCoordinate.longitude];
+
+    }
+}
+
 /*
  #pragma mark - Navigation
  

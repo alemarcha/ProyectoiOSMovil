@@ -16,7 +16,6 @@
         NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
         f.numberStyle = NSNumberFormatterDecimalStyle;
         
-
         self.avgRate=[f numberFromString:avRage];
         self.identificador=[f numberFromString:identi];
     }
