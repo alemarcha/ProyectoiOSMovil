@@ -12,8 +12,10 @@
 
 @interface MapViewController : UIViewController<CLLocationManagerDelegate,MKMapViewDelegate>
 @property (nonatomic,retain) CLLocationManager *locationManager;
-@property (strong, nonatomic) IBOutlet MKMapView *mapComponent;
+@property (weak, nonatomic) IBOutlet MKMapView *mapComponent;
+
 @property bool *primeraUbicacion;
+
 @property NSNumber *ultimaLatitudPeticion;
 @property NSNumber *ultimaLongitudPeticion;
 @property NSMutableDictionary *dict;
