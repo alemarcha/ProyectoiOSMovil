@@ -30,10 +30,11 @@
     _mapComponent.showsUserLocation=YES;
     self.primeraUbicacion=false;
     self.latitudDelta=0.2;
-
-self.longDelta=0.2;
-
-
+    self.longDelta=0.2;
+    self.oldValueZoom=0;
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,37 +43,37 @@ self.longDelta=0.2;
 }
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
     CLLocation *loc= [locations lastObject];
-    NSLog(@"Latitud: %f y longitud: %f",(double)loc.coordinate.latitude,(double)loc.coordinate.longitude);
-//    // Earth’s radius, sphere
-//    
-//    float radioTierra=6378137;
-//    
-//    // offsets in meters
-//    float dn = 1000;
-//    float de = 1000;
-//    
-//    
-//    // Coordinate offsets in radians
-//    float dLat =  dn / radioTierra;
-//    float dLon = de / (radioTierra * cos(M_PI * loc.coordinate.latitude / 180));
-//    
-//    // OffsetPosition, decimal degrees
-//    float mayorLat = loc.coordinate.latitude + dLat * 180 / M_PI;
-//    double mayorLongitud = loc.coordinate.longitude + dLon * 180 / M_PI;
-//    
-//    double menorLat = loc.coordinate.latitude - dLat * 180 / M_PI;
-//    double menorLongitud = loc.coordinate.longitude - dLon * 180 / M_PI;
-//    
-//    
-//    
-//    if (!self.primeraUbicacion || mayorLat<[_ultimaLatitudPeticion floatValue] || menorLat>[self.ultimaLatitudPeticion floatValue] ||  menorLongitud>[self.ultimaLongitudPeticion floatValue]|| mayorLongitud<[_ultimaLongitudPeticion floatValue ]) {
+    // NSLog(@"Latitud: %f y longitud: %f",(double)loc.coordinate.latitude,(double)loc.coordinate.longitude);
+    //    // Earth’s radius, sphere
+    //
+    //    float radioTierra=6378137;
+    //
+    //    // offsets in meters
+    //    float dn = 1000;
+    //    float de = 1000;
+    //
+    //
+    //    // Coordinate offsets in radians
+    //    float dLat =  dn / radioTierra;
+    //    float dLon = de / (radioTierra * cos(M_PI * loc.coordinate.latitude / 180));
+    //
+    //    // OffsetPosition, decimal degrees
+    //    float mayorLat = loc.coordinate.latitude + dLat * 180 / M_PI;
+    //    double mayorLongitud = loc.coordinate.longitude + dLon * 180 / M_PI;
+    //
+    //    double menorLat = loc.coordinate.latitude - dLat * 180 / M_PI;
+    //    double menorLongitud = loc.coordinate.longitude - dLon * 180 / M_PI;
+    //
+    //
+    //
+    //    if (!self.primeraUbicacion || mayorLat<[_ultimaLatitudPeticion floatValue] || menorLat>[self.ultimaLatitudPeticion floatValue] ||  menorLongitud>[self.ultimaLongitudPeticion floatValue]|| mayorLongitud<[_ultimaLongitudPeticion floatValue ]) {
     if (!self.primeraUbicacion){
         self.primeraUbicacion=true;
         [self getRestaurantes:loc.coordinate.latitude longitud:loc.coordinate.longitude];
     }
-//    
-//    [self.locationManager stopUpdatingLocation];
-//    [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(_turnOnLocationManager)  userInfo:nil repeats:NO];
+    //
+    //    [self.locationManager stopUpdatingLocation];
+    //    [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(_turnOnLocationManager)  userInfo:nil repeats:NO];
     
 }
 
@@ -104,20 +105,20 @@ self.longDelta=0.2;
             for (int i=0; tam>i; i++) {
                 
                 NSString *latitud=[NSString stringWithFormat:@"%@",[restaurantesInfo[i] valueForKey:@"latitud"]];
-                                NSString *id=[NSString stringWithFormat:@"%@",[restaurantesInfo[i] valueForKey:@"id"]];
+                NSString *id=[NSString stringWithFormat:@"%@",[restaurantesInfo[i] valueForKey:@"id"]];
                 NSString *longitud=[NSString stringWithFormat:@"%@",[restaurantesInfo[i] valueForKey:@"longitud"]];
                 NSString *name=[NSString stringWithFormat:@"%@",[restaurantesInfo[i] valueForKey:@"name"]];
                 NSString *speciality=[NSString stringWithFormat:@"%@",[restaurantesInfo[i] valueForKey:@"speciality"]];
                 NSString *avgRateString=[NSString stringWithFormat:@"%@",[restaurantesInfo[i] valueForKey:@"avgRate"]];
-
+                
                 CustomMKPointAnnotation *point=[[CustomMKPointAnnotation alloc] initWithLocation:id avRage:avgRateString];
                 NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
                 f.numberStyle = NSNumberFormatterDecimalStyle;
                 NSNumber *myNumber = [f numberFromString:avgRateString];
                 NSString *imprimir=[NSString stringWithFormat:name,@"-",id];
-
-               
-               
+                
+                
+                
                 
                 CLLocationCoordinate2D coord;
                 
@@ -139,11 +140,11 @@ self.longDelta=0.2;
             coord.latitude = latitud;
             
             coord.longitude = longitud;
-           // MKCoordinateRegion rec=MKCoordinateRegionMakeWithDistance(coord, 2000, 2000);
-
-
-           MKCoordinateRegion rec= MKCoordinateRegionMake(coord,MKCoordinateSpanMake(self.latitudDelta, self.longDelta));
-            self.mapComponent.mapType=MKMapTypeHybrid;
+            // MKCoordinateRegion rec=MKCoordinateRegionMakeWithDistance(coord, 2000, 2000);
+            
+            
+            MKCoordinateRegion rec= MKCoordinateRegionMake(coord,MKCoordinateSpanMake(self.latitudDelta, self.longDelta));
+            
             
             [self.mapComponent setRegion:rec];
         }
@@ -167,41 +168,42 @@ self.longDelta=0.2;
         pinView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"CustomPinAnnotationView"];
     }
     
-        pinView.canShowCallout = YES;
-
-        if(((CustomMKPointAnnotation *)annotation).avgRate!=nil && [((CustomMKPointAnnotation *)annotation).avgRate doubleValue] < 5){
-            pinView.image=[UIImage imageNamed:@"Image_black"];
+    pinView.canShowCallout = YES;
+    
+    if(((CustomMKPointAnnotation *)annotation).avgRate!=nil && [((CustomMKPointAnnotation *)annotation).avgRate doubleValue] < 5){
+        pinView.image=[UIImage imageNamed:@"Image_black"];
         
-        }else if(((CustomMKPointAnnotation *)annotation).avgRate!=nil && [((CustomMKPointAnnotation *)annotation).avgRate doubleValue] < 6){
-            pinView.image=[UIImage imageNamed:@"Image_brown"];
-        }else if(((CustomMKPointAnnotation *)annotation).avgRate!=nil && [((CustomMKPointAnnotation *)annotation).avgRate doubleValue]< 7){
-            pinView.image=[UIImage imageNamed:@"Image_blue"];
-        }else if(((CustomMKPointAnnotation *)annotation).avgRate!=nil && [((CustomMKPointAnnotation *)annotation).avgRate doubleValue] < 8){
-            pinView.image=[UIImage imageNamed:@"Image_green"];
-        }else if(((CustomMKPointAnnotation *)annotation).avgRate!=nil && [((CustomMKPointAnnotation *)annotation).avgRate doubleValue] < 10){
-            pinView.image=[UIImage imageNamed:@"Image_pink"];
-            
-        }else{
-            pinView.image=[UIImage imageNamed:@"Image_white"];
-        }
+    }else if(((CustomMKPointAnnotation *)annotation).avgRate!=nil && [((CustomMKPointAnnotation *)annotation).avgRate doubleValue] < 6){
+        pinView.image=[UIImage imageNamed:@"Image_brown"];
+    }else if(((CustomMKPointAnnotation *)annotation).avgRate!=nil && [((CustomMKPointAnnotation *)annotation).avgRate doubleValue]< 7){
+        pinView.image=[UIImage imageNamed:@"Image_blue"];
+    }else if(((CustomMKPointAnnotation *)annotation).avgRate!=nil && [((CustomMKPointAnnotation *)annotation).avgRate doubleValue] < 8){
+        pinView.image=[UIImage imageNamed:@"Image_green"];
+    }else if(((CustomMKPointAnnotation *)annotation).avgRate!=nil && [((CustomMKPointAnnotation *)annotation).avgRate doubleValue] <= 10){
+        pinView.image=[UIImage imageNamed:@"Image_pink"];
         
-        pinView.calloutOffset = CGPointMake(0, 32);
-
-
+    }else{
+        pinView.image=[UIImage imageNamed:@"Image_white"];
+    }
+    
+    pinView.calloutOffset = CGPointMake(0, 32);
+    
+    
     
     
     
     return pinView;
 }
 -(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
-
+    
     NSLog(@"holaaa%f %f",mapView.centerCoordinate.latitude,mapView.centerCoordinate.longitude);
-        NSLog(@"delta%f %f",mapView.region.span.latitudeDelta,mapView.region.span.longitudeDelta);
+    NSLog(@"delta%f %f",mapView.region.span.latitudeDelta,mapView.region.span.longitudeDelta);
     if(self.primeraUbicacion){
         self.latitudDelta=mapView.region.span.latitudeDelta;
         self.longDelta=mapView.region.span.longitudeDelta;
-    [self getRestaurantes:mapView.centerCoordinate.latitude longitud:mapView.centerCoordinate.longitude];
-
+        [self getRestaurantes:mapView.centerCoordinate.latitude longitud:mapView.centerCoordinate.longitude];
+        
+        
     }
 }
 
@@ -214,5 +216,51 @@ self.longDelta=0.2;
  // Pass the selected object to the new view controller.
  }
  */
+
+- (IBAction)changedTipeMap:(id)sender {
+    
+    if([self.segmentedTipeMap selectedSegmentIndex] == 0){
+        self.mapComponent.mapType = MKMapTypeStandard;
+    }else if([self.segmentedTipeMap selectedSegmentIndex]==1){
+        self.mapComponent.mapType = MKMapTypeHybrid;
+    }else{
+        self.mapComponent.mapType = MKMapTypeSatellite;
+    }
+    
+    
+}
+
+- (IBAction)changedZoom:(id)sender {
+    if(self.stteperZoom.value>self.oldValueZoom){
+        self.oldValueZoom=self.stteperZoom.value;
+        if(self.longDelta<0.1 && self.longDelta>0.01){
+            self.longDelta-=0.01;
+        }else if(self.longDelta<0.01 && self.longDelta>0.001){
+            
+            self.longDelta-=0.001;
+        }else if(self.longDelta>0.1){
+            
+            self.longDelta-=0.1;
+        }
+        
+        if(self.latitudDelta <0.1 && self.latitudDelta>0.01){
+            self.latitudDelta-=0.01;
+        }else if(self.latitudDelta <0.1 && self.latitudDelta>0.001){
+                            self.latitudDelta-=0.001;
+        }
+        else if(self.latitudDelta>0.1){
+            self.latitudDelta-=0.1;
+        }
+    }else{
+        self.latitudDelta+=0.4;
+        self.longDelta+=0.4;
+        self.oldValueZoom=self.stteperZoom.value ;
+    }
+    [self getRestaurantes:_mapComponent.centerCoordinate.latitude longitud:_mapComponent.centerCoordinate.longitude];
+    NSLog(@"%f",self.stteperZoom.value);
+}
+
+
+
 
 @end

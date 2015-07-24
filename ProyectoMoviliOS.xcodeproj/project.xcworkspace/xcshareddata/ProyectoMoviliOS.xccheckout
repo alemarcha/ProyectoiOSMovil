@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>6B2C30D6-58A5-4826-83BF-1F4C21D44593</string>
 	<key>IDESourceControlProjectName</key>
-	<string>ProyectoMoviliOS</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>6436C3C49E863CD9B9382A216DE251F9AF5ED2CA</key>
 		<string>https://github.com/alemarcha/ProyectoiOSMovil.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>ProyectoMoviliOS.xcodeproj</string>
+	<string>ProyectoMoviliOS.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>6436C3C49E863CD9B9382A216DE251F9AF5ED2CA</key>
