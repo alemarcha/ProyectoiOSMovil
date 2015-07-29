@@ -10,6 +10,7 @@
 #import "MapViewController.h"
 #import "math.h"
 #import "CustomMKPointAnnotation.h"
+#import "DetailsViewController.h"
 
 @interface MapViewController ()
 
@@ -104,33 +105,10 @@
             self.dict =[[NSMutableDictionary alloc] init];
             for (int i=0; tam>i; i++) {
                 
-                NSString *latitud=[NSString stringWithFormat:@"%@",[restaurantesInfo[i] valueForKey:@"latitud"]];
-                NSString *id=[NSString stringWithFormat:@"%@",[restaurantesInfo[i] valueForKey:@"id"]];
-                NSString *longitud=[NSString stringWithFormat:@"%@",[restaurantesInfo[i] valueForKey:@"longitud"]];
-                NSString *name=[NSString stringWithFormat:@"%@",[restaurantesInfo[i] valueForKey:@"name"]];
-                NSString *speciality=[NSString stringWithFormat:@"%@",[restaurantesInfo[i] valueForKey:@"speciality"]];
-                NSString *avgRateString=[NSString stringWithFormat:@"%@",[restaurantesInfo[i] valueForKey:@"avgRate"]];
                 
-                CustomMKPointAnnotation *point=[[CustomMKPointAnnotation alloc] initWithLocation:id avRage:avgRateString];
-                NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-                f.numberStyle = NSNumberFormatterDecimalStyle;
-                NSNumber *myNumber = [f numberFromString:avgRateString];
-                NSString *imprimir=[NSString stringWithFormat:name,@"-",id];
+                CustomMKPointAnnotation *point=[[CustomMKPointAnnotation alloc] initWithValues:restaurantesInfo[i]];
                 
                 
-                
-                
-                CLLocationCoordinate2D coord;
-                
-                coord.latitude = latitud.doubleValue;
-                
-                coord.longitude = longitud.doubleValue;
-                
-                //MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
-                point.coordinate = coord;
-                point.title=[NSString stringWithFormat:avgRateString];
-                point.subtitle = imprimir;
-                point.avgRate =myNumber;
                 [self.mapComponent addAnnotation:point];
                 
             }
@@ -186,6 +164,9 @@
         pinView.image=[UIImage imageNamed:@"Image_white"];
     }
     
+    UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    pinView.rightCalloutAccessoryView = rightButton;
+    
     pinView.calloutOffset = CGPointMake(0, 32);
     
     
@@ -193,6 +174,26 @@
     
     
     return pinView;
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    
+    if (control == view.annotation) {
+        //handle left control tap...
+    }
+    else if (control == view.rightCalloutAccessoryView) {
+        //handle right control tap...
+    }
+    
+    UIStoryboard *storyboard = self.navigationController.storyboard;
+    DetailsViewController *detail = [storyboard
+                                    instantiateViewControllerWithIdentifier:@"DetailViewController"];
+    detail.detallesAnotacion=view;
+
+[self.navigationController pushViewController:detail animated:YES];
+    
+    
+    
 }
 -(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
     
@@ -246,7 +247,7 @@
         if(self.latitudDelta <0.1 && self.latitudDelta>0.01){
             self.latitudDelta-=0.01;
         }else if(self.latitudDelta <0.1 && self.latitudDelta>0.001){
-                            self.latitudDelta-=0.001;
+            self.latitudDelta-=0.001;
         }
         else if(self.latitudDelta>0.1){
             self.latitudDelta-=0.1;

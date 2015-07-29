@@ -15,8 +15,13 @@
 @property (nonatomic) NSNumber *avgRate;
 @property (nonatomic,copy) NSString *title;
 @property (nonatomic,copy) NSString *subtitle;
+@property (nonatomic,copy) NSString *descript;
+@property (nonatomic,copy) NSString *freeTables;
+@property (nonatomic,copy) NSString *hourOpen;
+@property (nonatomic,copy) NSString *phone;
+@property (nonatomic,copy) NSString *speciality;
 @property (nonatomic) CLLocationCoordinate2D coordinate;
-- (id)initWithLocation:(NSString *) identi avRage:(NSString *) avRage;
+- (id)initWithValues:(NSJSONSerialization *) restaurantesInfo;
 
 @end
 
