@@ -20,6 +20,12 @@
     // Do any additional setup after loading the view.
     _labelTitle.text=    [_detallesAnotacion.annotation title];
     _labelDescription.text=    ((CustomMKPointAnnotation *)_detallesAnotacion.annotation).descript;
+    _labelHour.text=    ((CustomMKPointAnnotation *)_detallesAnotacion.annotation).hourOpen;
+
+    NSString *mesas = @"Mesas libres: ";
+    _labelFreeTables.text= [mesas stringByAppendingString:((CustomMKPointAnnotation *)_detallesAnotacion.annotation).freeTables];
+    
+    
 
     
 }

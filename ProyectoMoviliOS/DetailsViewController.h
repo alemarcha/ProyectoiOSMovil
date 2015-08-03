@@ -14,6 +14,8 @@
 @property (nonatomic) MKAnnotationView *detallesAnotacion;
 @property (weak, nonatomic) IBOutlet UILabel *labelTitle;
 @property (weak, nonatomic) IBOutlet UILabel *labelDescription;
+@property (weak, nonatomic) IBOutlet UILabel *labelHour;
+@property (weak, nonatomic) IBOutlet UILabel *labelFreeTables;
 
 
 @end

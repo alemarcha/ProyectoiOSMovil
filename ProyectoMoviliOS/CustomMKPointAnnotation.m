@@ -15,7 +15,7 @@
     if (self) {
         
         NSString *descripcion=[NSString stringWithFormat:@"%@",[restaurantesInfo valueForKey:@"description"]];
-        NSString *horario=[NSString stringWithFormat:@"%@",[restaurantesInfo valueForKey:@"hour_open"]];
+        NSString *horario=[NSString stringWithFormat:@"%@",[restaurantesInfo valueForKey:@"hourOpen"]];
         NSString *telefono=[NSString stringWithFormat:@"%@",[restaurantesInfo valueForKey:@"phone"]];
         NSString *mesasLibres=[NSString stringWithFormat:@"%@",[restaurantesInfo valueForKey:@"freetables"]];
         NSString *latitud=[NSString stringWithFormat:@"%@",[restaurantesInfo valueForKey:@"latitud"]];
