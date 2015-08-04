@@ -94,7 +94,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Lg0-1F-5MJ" kind="show" id="2ys-r2-HXU"/>
+                                    <action selector="onClickLoginButton:" destination="1jD-pe-kYI" eventType="touchUpInside" id="gzU-tB-F0M"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -167,6 +167,7 @@
                         <outlet property="buttonEntrar" destination="44P-nb-5ZC" id="UdX-hj-u04"/>
                         <outlet property="passwordInput" destination="HBF-N3-KHW" id="emS-SQ-qRO"/>
                         <outlet property="userInput" destination="Dyt-tb-8Bo" id="KkF-so-exc"/>
+                        <segue destination="Lg0-1F-5MJ" kind="show" identifier="segueToMap" id="Rbm-Q1-9bA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q25-8c-LeC" userLabel="First Responder" sceneMemberID="firstResponder"/>
