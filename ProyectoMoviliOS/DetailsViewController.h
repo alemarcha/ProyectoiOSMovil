@@ -15,7 +15,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *labelTitle;
 @property (weak, nonatomic) IBOutlet UILabel *labelDescription;
 @property (weak, nonatomic) IBOutlet UILabel *labelHour;
-@property (weak, nonatomic) IBOutlet UILabel *labelFreeTables;
+@property (weak, nonatomic) IBOutlet UILabel *valoracion;
+@property (weak, nonatomic) IBOutlet UILabel *especialidad;
+@property (weak, nonatomic) IBOutlet UILabel *mesasLibres;
+@property (weak, nonatomic) IBOutlet UILabel *telefono;
 
 
 @end

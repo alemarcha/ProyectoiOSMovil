@@ -33,6 +33,8 @@
     self.latitudDelta=0.2;
     self.longDelta=0.2;
     self.oldValueZoom=0;
+    self.rangoBusqueda=1000;
+    
     
     
     
@@ -89,7 +91,7 @@
     
     NSString *myStringLatitud = [[NSNumber numberWithDouble:latitud] stringValue];
     NSString *myStringLongitud= [[NSNumber numberWithDouble:longitud] stringValue];
-    NSString *urlForm= [NSString stringWithFormat:@"%@%@/%@/1000", @"http://localhost:8888/Trabajo-fin-master-us/api/restaurantesPorCercaniaLatLong/", myStringLatitud,myStringLongitud];
+    NSString *urlForm= [NSString stringWithFormat:@"%@%@/%@/%f", @"http://localhost:8888/Trabajo-fin-master-us/api/restaurantesPorCercaniaLatLong/", myStringLatitud,myStringLongitud,self.rangoBusqueda];
     NSMutableString *urlString=[[NSMutableString alloc]initWithString:urlForm];
     NSURL *url= [NSURL URLWithString:urlString];
     NSURLRequest *req=[NSURLRequest requestWithURL:url];
@@ -235,12 +237,13 @@
     if(self.stteperZoom.value>self.oldValueZoom){
         self.oldValueZoom=self.stteperZoom.value;
         if(self.longDelta<0.1 && self.longDelta>0.01){
+            self.rangoBusqueda=1000;
             self.longDelta-=0.01;
         }else if(self.longDelta<0.01 && self.longDelta>0.001){
-            
+            self.rangoBusqueda=2500;
             self.longDelta-=0.001;
         }else if(self.longDelta>0.1){
-            
+            self.rangoBusqueda=3500;
             self.longDelta-=0.1;
         }
         
@@ -255,6 +258,7 @@
     }else{
         self.latitudDelta+=0.4;
         self.longDelta+=0.4;
+        self.rangoBusqueda=3500;
         self.oldValueZoom=self.stteperZoom.value ;
     }
     [self getRestaurantes:_mapComponent.centerCoordinate.latitude longitud:_mapComponent.centerCoordinate.longitude];

@@ -13,28 +13,65 @@
 - (id)initWithValues:(NSJSONSerialization *) restaurantesInfo{
     self = [super init];
     if (self) {
+        NSString *noDisponible=@"No disponible";
+        if(![[restaurantesInfo valueForKey:@"description"] isEqual:[NSNull null]]){
+            
+            self.descript=[NSString stringWithFormat:@"%@",[restaurantesInfo valueForKey:@"description"]];
+        }else{
+            self.descript=noDisponible;
+        }
+        if(![[restaurantesInfo valueForKey:@"hourOpen"] isEqual:[NSNull null]]){
+            self.hourOpen=[NSString stringWithFormat:@"%@",[restaurantesInfo valueForKey:@"hourOpen"]];
+        }else{
+            self.hourOpen=noDisponible;
+        }
+        if(![[restaurantesInfo valueForKey:@"phone"] isEqual:[NSNull null]]){
+            self.phone=[NSString stringWithFormat:@"%@",[restaurantesInfo valueForKey:@"phone"]];
+        }else{
+            self.phone=noDisponible;
+        }
+        if(![[restaurantesInfo valueForKey:@"freetables"] isEqual:[NSNull null]]){
+            self.freeTables=[NSString stringWithFormat:@"%@",[restaurantesInfo valueForKey:@"freetables"]];
+        }else{
+            self.freeTables=noDisponible;
+        }
         
-        NSString *descripcion=[NSString stringWithFormat:@"%@",[restaurantesInfo valueForKey:@"description"]];
-        NSString *horario=[NSString stringWithFormat:@"%@",[restaurantesInfo valueForKey:@"hourOpen"]];
-        NSString *telefono=[NSString stringWithFormat:@"%@",[restaurantesInfo valueForKey:@"phone"]];
-        NSString *mesasLibres=[NSString stringWithFormat:@"%@",[restaurantesInfo valueForKey:@"freetables"]];
-        NSString *latitud=[NSString stringWithFormat:@"%@",[restaurantesInfo valueForKey:@"latitud"]];
-        NSString *identi=[NSString stringWithFormat:@"%@",[restaurantesInfo valueForKey:@"id"]];
-        NSString *longitud=[NSString stringWithFormat:@"%@",[restaurantesInfo valueForKey:@"longitud"]];
-        NSString *name=[NSString stringWithFormat:@"%@",[restaurantesInfo valueForKey:@"name"]];
-        NSString *speciality=[NSString stringWithFormat:@"%@",[restaurantesInfo valueForKey:@"speciality"]];
-        NSString *avgRateString=[NSString stringWithFormat:@"%@",[restaurantesInfo valueForKey:@"avgRate"]];
+        if(![[restaurantesInfo valueForKey:@"name"] isEqual:[NSNull null]]){
+            self.title=[NSString stringWithFormat:@"%@",[restaurantesInfo valueForKey:@"name"]];
+        }else{
+            self.title=noDisponible;
+        }
+        if(![[restaurantesInfo valueForKey:@"speciality"] isEqual:[NSNull null]]){
+            self.speciality=[NSString stringWithFormat:@"%@",[restaurantesInfo valueForKey:@"speciality"]];
+
+        }else{
+            self.speciality=noDisponible;
+        }
+       
         NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
         f.numberStyle = NSNumberFormatterDecimalStyle;
+
         
-        self.descript=descripcion;
-        self.hourOpen=horario;
-        self.phone=telefono;
-        self.freeTables=mesasLibres;
-        self.title=name;
-        self.subtitle=speciality;
-        self.avgRate=[f numberFromString:avgRateString];
+        NSString *latitud=[NSString stringWithFormat:@"%@",[restaurantesInfo valueForKey:@"latitud"]];
+        NSString *identi=[NSString stringWithFormat:@"%@",[restaurantesInfo valueForKey:@"id"]];
+        NSString *avgString=[NSString stringWithFormat:@"%@",[restaurantesInfo valueForKey:@"avgRate"] ];
+        NSString *longitud=[NSString stringWithFormat:@"%@",[restaurantesInfo valueForKey:@"longitud"]];
+        
+        self.subtitle=self.speciality;
         self.identificador=[f numberFromString:identi];
+        f.maximumFractionDigits=2;
+        f.minimumFractionDigits = 2;
+
+
+         self.avgRate=[f numberFromString:avgString];
+
+        if(![[restaurantesInfo valueForKey:@"avgRate"] isEqual:[NSNull null]]){
+            self.avgRateString=[f stringFromNumber:self.avgRate];
+            
+        }else{
+            self.avgRateString=noDisponible;
+        }
+       
         CLLocationCoordinate2D coord;
         
         coord.latitude = latitud.doubleValue;
@@ -42,8 +79,8 @@
         coord.longitude = longitud.doubleValue;
         
         self.coordinate = coord;
-
-
+        
+        
         
     }
     return self;

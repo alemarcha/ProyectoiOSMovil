@@ -26,6 +26,7 @@
 @property CLLocationDegrees latitudDelta;
 @property CLLocationDegrees longDelta;
 @property double oldValueZoom;
+@property double rangoBusqueda;
 - (IBAction)changedTipeMap:(id)sender;
 
 

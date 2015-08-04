@@ -21,9 +21,12 @@
     _labelTitle.text=    [_detallesAnotacion.annotation title];
     _labelDescription.text=    ((CustomMKPointAnnotation *)_detallesAnotacion.annotation).descript;
     _labelHour.text=    ((CustomMKPointAnnotation *)_detallesAnotacion.annotation).hourOpen;
+    _mesasLibres.text=((CustomMKPointAnnotation *)_detallesAnotacion.annotation).freeTables;
+    _especialidad.text=((CustomMKPointAnnotation *)_detallesAnotacion.annotation).speciality;
+        _valoracion.text=((CustomMKPointAnnotation *)_detallesAnotacion.annotation).avgRateString;
+        _telefono.text=((CustomMKPointAnnotation *)_detallesAnotacion.annotation).phone;
 
-    NSString *mesas = @"Mesas libres: ";
-    _labelFreeTables.text= [mesas stringByAppendingString:((CustomMKPointAnnotation *)_detallesAnotacion.annotation).freeTables];
+
     
     
 

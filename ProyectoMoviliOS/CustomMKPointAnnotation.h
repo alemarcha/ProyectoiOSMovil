@@ -13,6 +13,7 @@
 
 @property (nonatomic) NSNumber *identificador;
 @property (nonatomic) NSNumber *avgRate;
+@property (nonatomic) NSString *avgRateString;
 @property (nonatomic,copy) NSString *title;
 @property (nonatomic,copy) NSString *subtitle;
 @property (nonatomic,copy) NSString *descript;
