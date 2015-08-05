@@ -13,5 +13,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *userInput;
 @property (weak, nonatomic) IBOutlet UITextField *passwordInput;
 @property (weak, nonatomic) IBOutlet UIButton *buttonEntrar;
+@property bool *existeUsuario;
 - (IBAction)onClickLoginButton:(id)sender;
+- (void) login:(NSString *) usuario password:(NSString *) password completion:(void (^)(NSDictionary *dictionary, NSError *error))completion;
+
 @end
