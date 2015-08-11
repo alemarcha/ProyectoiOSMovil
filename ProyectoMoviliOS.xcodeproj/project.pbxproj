@@ -18,6 +18,7 @@
 		02BDE2231B54343F00BA3A97 /* ProyectoMoviliOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 02BDE2221B54343F00BA3A97 /* ProyectoMoviliOSTests.m */; };
 		02BE6FD41B67B5A000BDD485 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02BE6FD31B67B5A000BDD485 /* DetailsViewController.m */; };
 		02D9C16D1B55843B00FC6E03 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02D9C16C1B55843B00FC6E03 /* MapKit.framework */; };
+		02DAD4461B7393E4000F0266 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02DAD4451B7393E4000F0266 /* RegisterViewController.m */; };
 		02FE10021B5A87C000948211 /* CustomMKPointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FE10011B5A87C000948211 /* CustomMKPointAnnotation.m */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +53,8 @@
 		02BE6FD21B67B5A000BDD485 /* DetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
 		02BE6FD31B67B5A000BDD485 /* DetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
 		02D9C16C1B55843B00FC6E03 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		02DAD4441B7393E4000F0266 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		02DAD4451B7393E4000F0266 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		02FE10001B5A87C000948211 /* CustomMKPointAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomMKPointAnnotation.h; sourceTree = "<group>"; };
 		02FE10011B5A87C000948211 /* CustomMKPointAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomMKPointAnnotation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -113,6 +116,8 @@
 				02FE10011B5A87C000948211 /* CustomMKPointAnnotation.m */,
 				02BE6FD21B67B5A000BDD485 /* DetailsViewController.h */,
 				02BE6FD31B67B5A000BDD485 /* DetailsViewController.m */,
+				02DAD4441B7393E4000F0266 /* RegisterViewController.h */,
+				02DAD4451B7393E4000F0266 /* RegisterViewController.m */,
 			);
 			path = ProyectoMoviliOS;
 			sourceTree = "<group>";
@@ -256,6 +261,7 @@
 				02BE6FD41B67B5A000BDD485 /* DetailsViewController.m in Sources */,
 				02FE10021B5A87C000948211 /* CustomMKPointAnnotation.m in Sources */,
 				02BDE2091B54343F00BA3A97 /* main.m in Sources */,
+				02DAD4461B7393E4000F0266 /* RegisterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -56,7 +56,8 @@
             if(!error){
                 NSLog(@"aa");
                 if(dictionary){
-                    [self performSegueWithIdentifier:@"segueToMap" sender:nil];}else{
+                    [self performSegueWithIdentifier:@"segueToMap" sender:nil];
+                }else{
                         UIAlertView *alert = [[UIAlertView alloc]
                                               initWithTitle:@"Lo sentimos, el usuario y contraseña no son correctos"
                                               message:@"Intentelo de nuevo."
