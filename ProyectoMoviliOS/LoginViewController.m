@@ -93,7 +93,7 @@
     
 }
 - (void) login:(NSString *) usuario password:(NSString *) password completion:(void (^)(NSDictionary *dictionary, NSError *error))completion {
-    NSString *urlForm= [NSString stringWithFormat:@"%@%@/%@/", @"http://localhost:8888/Trabajo-fin-master-us/api/login/", usuario,password];
+    NSString *urlForm= [NSString stringWithFormat:@"%@%@/%@/", @"http://172.26.0.157:8888/Trabajo-fin-master-us/api/login/", usuario,password];
     NSMutableString *urlString=[[NSMutableString alloc]initWithString:urlForm];
     NSURL *url= [NSURL URLWithString:urlString];
     NSURLRequest *req=[NSURLRequest requestWithURL:url];
@@ -109,6 +109,10 @@
                 completion(restaurantesInfo, connectionError);
         }
     }];
+}
+
+- (IBAction)touchOutPass:(id)sender {
+    [sender resignFirstResponder];
 }
 
 

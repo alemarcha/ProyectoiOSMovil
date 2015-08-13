@@ -14,4 +14,5 @@
 @property (weak, nonatomic) IBOutlet UITextField *inputPassword;
 @property (weak, nonatomic) IBOutlet UISwitch *aceptaLosTerminps;
 - (void) addUser:(NSString *) usuario password:(NSString *) password completion:(void (^)(NSDictionary *res, NSError *error))completion;
+- (IBAction)touchOutPass:(id)sender;
 @end

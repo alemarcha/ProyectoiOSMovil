@@ -133,4 +133,8 @@
         }
     }];
 }
+
+- (IBAction)touchOutPass:(id)sender {
+    [sender resignFirstResponder];
+}
 @end

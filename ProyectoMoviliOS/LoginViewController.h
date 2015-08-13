@@ -16,5 +16,6 @@
 @property bool *existeUsuario;
 - (IBAction)onClickLoginButton:(id)sender;
 - (void) login:(NSString *) usuario password:(NSString *) password completion:(void (^)(NSDictionary *dictionary, NSError *error))completion;
+- (IBAction)touchOutPass:(id)sender;
 
 @end
