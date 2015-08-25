@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02AA90D71B7E72A200DB9C1C /* Images-3.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02AA90D61B7E72A200DB9C1C /* Images-3.xcassets */; };
 		02B4D21F1B55420200E845AF /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B4D21E1B55420200E845AF /* LoginViewController.m */; };
 		02B4D2221B55421100E845AF /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02B4D2211B55421100E845AF /* MapViewController.m */; };
 		02BDE2091B54343F00BA3A97 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 02BDE2081B54343F00BA3A97 /* main.m */; };
@@ -33,6 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		02AA90D61B7E72A200DB9C1C /* Images-3.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Images-3.xcassets"; sourceTree = "<group>"; };
 		02B4D21D1B55420200E845AF /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		02B4D21E1B55420200E845AF /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		02B4D2201B55421100E845AF /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				02BE6FD31B67B5A000BDD485 /* DetailsViewController.m */,
 				02DAD4441B7393E4000F0266 /* RegisterViewController.h */,
 				02DAD4451B7393E4000F0266 /* RegisterViewController.m */,
+				02AA90D61B7E72A200DB9C1C /* Images-3.xcassets */,
 			);
 			path = ProyectoMoviliOS;
 			sourceTree = "<group>";
@@ -237,6 +240,7 @@
 				02BDE2121B54343F00BA3A97 /* Main.storyboard in Resources */,
 				02BDE2171B54343F00BA3A97 /* LaunchScreen.xib in Resources */,
 				02BDE2141B54343F00BA3A97 /* Images.xcassets in Resources */,
+				02AA90D71B7E72A200DB9C1C /* Images-3.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,6 +391,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = ProyectoMoviliOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -398,6 +403,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = ProyectoMoviliOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

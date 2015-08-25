@@ -45,7 +45,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
-    CLLocation *loc= [locations lastObject];
+    self.currentLocation= [locations lastObject];
     // NSLog(@"Latitud: %f y longitud: %f",(double)loc.coordinate.latitude,(double)loc.coordinate.longitude);
     //    // Earth’s radius, sphere
     //
@@ -71,8 +71,10 @@
     //
     //    if (!self.primeraUbicacion || mayorLat<[_ultimaLatitudPeticion floatValue] || menorLat>[self.ultimaLatitudPeticion floatValue] ||  menorLongitud>[self.ultimaLongitudPeticion floatValue]|| mayorLongitud<[_ultimaLongitudPeticion floatValue ]) {
     if (!self.primeraUbicacion){
+        if(self.currentLocation!=nil){
         self.primeraUbicacion=true;
-        [self getRestaurantes:loc.coordinate.latitude longitud:loc.coordinate.longitude];
+        [self getRestaurantes:self.currentLocation.coordinate.latitude longitud:self.currentLocation.coordinate.longitude];
+        }
     }
     //
     //    [self.locationManager stopUpdatingLocation];
@@ -231,6 +233,10 @@
     }
     
     
+}
+
+- (IBAction)posicionActual:(id)sender {
+            [self getRestaurantes:self.currentLocation.coordinate.latitude longitud:self.currentLocation.coordinate.longitude];
 }
 
 - (IBAction)changedZoom:(id)sender {

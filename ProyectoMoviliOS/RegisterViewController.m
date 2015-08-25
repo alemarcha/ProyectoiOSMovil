@@ -38,7 +38,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     
-    if(alertView.tag==1){
+    if (alertView.tag == 1) {
         UIStoryboard *storyboard = self.navigationController.storyboard;
          LoginViewController *login = [storyboard
                                          instantiateViewControllerWithIdentifier:@"LoginViewController"];

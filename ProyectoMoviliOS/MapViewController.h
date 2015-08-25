@@ -25,10 +25,12 @@
 @property NSMutableDictionary *dict;
 @property CLLocationDegrees latitudDelta;
 @property CLLocationDegrees longDelta;
+@property CLLocation *currentLocation;
 @property double oldValueZoom;
 @property double rangoBusqueda;
 - (IBAction)changedTipeMap:(id)sender;
 
+- (IBAction)posicionActual:(id)sender;
 
 - (IBAction)changedZoom:(id)sender;
 - (void) getRestaurantes:(CLLocationDegrees) latitud longitud:(CLLocationDegrees) longitud;

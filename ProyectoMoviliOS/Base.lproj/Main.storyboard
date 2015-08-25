@@ -474,6 +474,15 @@
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="barTintColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
                             </toolbar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7T0-eg-t1k">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Posición actual">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="posicionActual:" destination="Lg0-1F-5MJ" eventType="touchDown" id="DMx-Kh-iXU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -484,16 +493,21 @@
                             <constraint firstItem="PTU-E0-w0G" firstAttribute="top" secondItem="5f1-od-KNz" secondAttribute="bottom" id="CbF-sy-82P"/>
                             <constraint firstItem="OVI-tN-b4W" firstAttribute="top" secondItem="WFK-lh-y4h" secondAttribute="topMargin" constant="64" id="E1Z-iF-aPX"/>
                             <constraint firstItem="5f1-od-KNz" firstAttribute="leading" secondItem="WFK-lh-y4h" secondAttribute="leadingMargin" constant="-18" id="NGK-K0-SVw"/>
+                            <constraint firstAttribute="centerY" secondItem="7T0-eg-t1k" secondAttribute="centerY" constant="156" id="orr-Hw-Nhd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="5f1-od-KNz" secondAttribute="trailing" constant="-18" id="pJI-4Y-nlB"/>
+                            <constraint firstItem="7T0-eg-t1k" firstAttribute="trailing" secondItem="WFK-lh-y4h" secondAttribute="trailingMargin" id="vu2-Ye-G4d"/>
                             <constraint firstAttribute="trailingMargin" secondItem="OVI-tN-b4W" secondAttribute="trailing" constant="-16" id="wIV-Wk-2u4"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="5f1-od-KNz"/>
                                 <exclude reference="OVI-tN-b4W"/>
+                                <exclude reference="7T0-eg-t1k"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="CbF-sy-82P"/>
+                                <exclude reference="orr-Hw-Nhd"/>
+                                <exclude reference="vu2-Ye-G4d"/>
                                 <exclude reference="CM2-56-Lse"/>
                                 <exclude reference="E1Z-iF-aPX"/>
                                 <exclude reference="wIV-Wk-2u4"/>
@@ -506,9 +520,12 @@
                             <mask key="subviews">
                                 <include reference="5f1-od-KNz"/>
                                 <include reference="OVI-tN-b4W"/>
+                                <include reference="7T0-eg-t1k"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="CbF-sy-82P"/>
+                                <include reference="orr-Hw-Nhd"/>
+                                <include reference="vu2-Ye-G4d"/>
                                 <include reference="CM2-56-Lse"/>
                                 <include reference="E1Z-iF-aPX"/>
                                 <include reference="wIV-Wk-2u4"/>
@@ -891,7 +908,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5q5-t7-lDp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2151" y="33"/>
+            <point key="canvasLocation" x="2001" y="43"/>
         </scene>
     </scenes>
     <resources>
