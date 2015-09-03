@@ -11,6 +11,7 @@
 
 @interface CustomMKPointAnnotation : NSObject <MKAnnotation>
 
+//Clase para parsear los datos que recibimos en el json desde el método getRestaurantes
 @property (nonatomic) NSNumber *identificador;
 @property (nonatomic) NSNumber *avgRate;
 @property (nonatomic) NSString *avgRateString;

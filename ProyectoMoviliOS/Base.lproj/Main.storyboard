@@ -487,13 +487,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="5f1-od-KNz" firstAttribute="top" secondItem="OVI-tN-b4W" secondAttribute="bottom" id="2aa-L8-rIe"/>
+                            <constraint firstItem="7T0-eg-t1k" firstAttribute="top" secondItem="OVI-tN-b4W" secondAttribute="bottom" constant="30" id="5ut-1E-KyJ"/>
                             <constraint firstItem="OVI-tN-b4W" firstAttribute="leading" secondItem="WFK-lh-y4h" secondAttribute="leadingMargin" constant="16" id="CM2-56-Lse">
                                 <variation key="widthClass=compact" constant="-16"/>
                             </constraint>
                             <constraint firstItem="PTU-E0-w0G" firstAttribute="top" secondItem="5f1-od-KNz" secondAttribute="bottom" id="CbF-sy-82P"/>
                             <constraint firstItem="OVI-tN-b4W" firstAttribute="top" secondItem="WFK-lh-y4h" secondAttribute="topMargin" constant="64" id="E1Z-iF-aPX"/>
                             <constraint firstItem="5f1-od-KNz" firstAttribute="leading" secondItem="WFK-lh-y4h" secondAttribute="leadingMargin" constant="-18" id="NGK-K0-SVw"/>
-                            <constraint firstAttribute="centerY" secondItem="7T0-eg-t1k" secondAttribute="centerY" constant="156" id="orr-Hw-Nhd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="5f1-od-KNz" secondAttribute="trailing" constant="-18" id="pJI-4Y-nlB"/>
                             <constraint firstItem="7T0-eg-t1k" firstAttribute="trailing" secondItem="WFK-lh-y4h" secondAttribute="trailingMargin" id="vu2-Ye-G4d"/>
                             <constraint firstAttribute="trailingMargin" secondItem="OVI-tN-b4W" secondAttribute="trailing" constant="-16" id="wIV-Wk-2u4"/>
@@ -506,7 +506,7 @@
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="CbF-sy-82P"/>
-                                <exclude reference="orr-Hw-Nhd"/>
+                                <exclude reference="5ut-1E-KyJ"/>
                                 <exclude reference="vu2-Ye-G4d"/>
                                 <exclude reference="CM2-56-Lse"/>
                                 <exclude reference="E1Z-iF-aPX"/>
@@ -524,7 +524,7 @@
                             </mask>
                             <mask key="constraints">
                                 <include reference="CbF-sy-82P"/>
-                                <include reference="orr-Hw-Nhd"/>
+                                <include reference="5ut-1E-KyJ"/>
                                 <include reference="vu2-Ye-G4d"/>
                                 <include reference="CM2-56-Lse"/>
                                 <include reference="E1Z-iF-aPX"/>

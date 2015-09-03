@@ -13,6 +13,7 @@
 - (id)initWithValues:(NSJSONSerialization *) restaurantesInfo{
     self = [super init];
     if (self) {
+        //Inicializamos todos los valores recibidos
         NSString *noDisponible=@"No disponible";
         if(![[restaurantesInfo valueForKey:@"description"] isEqual:[NSNull null]]){
             
